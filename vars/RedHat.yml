@@ -1,0 +1,5 @@
+---
+sep_gpg_key: https://download.sep.de/linux/RedHat/{{ ansible_architecture }}/RHEL{{ ansible_distribution_major_version }}/repodata/repomd.xml.key
+
+sep_repo: https://download.sep.de/linux/RedHat/{{ ansible_architecture }}/RHEL{{ ansible_distribution_major_version }}/
+...

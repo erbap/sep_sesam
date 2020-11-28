@@ -1,0 +1,11 @@
+---
+- name: Gather facts if not yet done
+  when: ansible_distribution is not defined
+  setup:
+
+- name: Include OS dependant variables
+  include_vars: "{{ ansible_distribution_file_variety }}.yml"
+
+- name: Istall OS dependant repo & packages
+  include_tasks: "install_{{ ansible_distribution_file_variety }}.yml"
+...

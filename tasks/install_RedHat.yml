@@ -1,0 +1,9 @@
+---
+- name: "install_RedHat | Install the SEP sesam repo"
+  yum_repository:
+    name: sep-sesam
+    description: "SEP sesam repo"
+    baseurl: "{{ sep_repo }}"
+    gpgkey: "{{ sep_gpg_key }}"
+    gpgcheck: yes
+...

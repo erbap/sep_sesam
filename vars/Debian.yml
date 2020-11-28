@@ -1,0 +1,24 @@
+---
+sep_os_release:
+  # Debian
+  "etch":    "Etch"    # 4
+  "lenny":   "Lenny"   # 6
+  "wheezy":  "Wheezy"  # 7
+  "jessie":  "Jessie"  # 8
+  "stretch": "Stretch" # 9
+  "buster":  "Buster"  # 10
+
+  # Ubuntu
+  "trusty":  "Wheezy"  # 14.04
+  "xenial":  "Jessie"  # 16.04
+  "bionic":  "Stretch" # 18.04
+
+sep_os_arch:
+  "i386":   "i386"
+  "x86_64": "amd64"
+  "ppc":    "ppc"
+
+sep_gpg_key: "https://download.sep.de/linux/repositories/debian/key.asc"
+
+sep_repo: "deb [arch={{ sep_os_arch[ansible_architecture]}}] https://download.sep.de/linux/repositories/debian/ {{ sep_os_release[ansible_distribution_release] | lower }} main"
+...

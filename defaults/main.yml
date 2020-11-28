@@ -1,0 +1,10 @@
+---
+# FQDN from the SEP server where the clients must be configured
+# This will be mostly configured in the `group_vars/all` but can be elsewhere when there are multiple SEP server in the environment.
+#sep_sesam_server: sep-server.yourdomain.tld
+
+# Defines the host type
+# Must be defined on the host level, posible values are
+# possible types are "srv, rds, gui, cli"
+#sep_sesam_host_type: "srv"
+...
