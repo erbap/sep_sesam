@@ -4,8 +4,12 @@ sep_sesam
 This Ansible role performs a basic SEP server, Remote Device Server (RDS), gui and client software installation and connect all clients to the SEP server.
 
 [SEP company site](https://www.sep.de/)
+[SEP installation](https://wiki.sepsoftware.com/wiki/index.php/4_4_3:SEP_sesam_Quick_Install_Guide)
+[SEP troubleshooting](https://wiki.sepsoftware.com/wiki/index.php/Troubleshooting_Guide)
 
 **Note:** This role is still in active development. There may be unidentified issues and the role variables may change as development continues.
+
+This role is developed wit ansible version 2.9.7 and install SEP sesam version 4.4.3.84
 
 ## Role Variables
 
@@ -25,6 +29,21 @@ Must be defined on the host level, posible values are
 | rds | For a Remote Device Server |
 | gui | For the GUI client |
 | cli | For a backup client only |
+
+## example playbook
+
+```
+---
+- hosts: all
+  become: True
+
+  vars:
+    sep_sesam_server: sep-server.example.com
+
+  roles:
+  - { role: erbap.sep_sesam, when: (sep_sesam_host_type is defined) }
+...
+```
 
 ## License
 
