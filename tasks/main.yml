@@ -13,6 +13,14 @@
     fail_msg: "'sep_sesam_host_type' must contain one of 'srv|rds|gui|cli'"
     success_msg: "'sep_sesam_host_type' == {{ sep_sesam_host_type }}"
 
+- name: "Verify that the variable sep_sesam_server is defined when sep_sesam_host_type <> 'srv'"
+  when: sep_sesam_host_type != 'srv'
+  assert:
+    that:
+    - sep_sesam_server is defined
+    fail_msg: "'sep_sesam_server' must be defined"
+    success_msg: "'sep_sesam_server' is defined"
+
 - name: "Gather facts if not yet done"
   when: ansible_distribution is not defined
   setup:
@@ -22,4 +30,17 @@
 
 - name: "Install OS dependant repo & packages"
   include_tasks: "install_{{ ansible_distribution_file_variety }}.yml"
+
+- name: "Enable external GUI to the sep-server"
+  when: sep_sesam_host_type == "srv"
+  shell: |
+    export PATH=$PATH:/opt/sesam/bin/sesam
+    sm_setup set_gui_allpermission
+
+- name: "Register client to the SEP server"
+  when: sep_sesam_host_type != 'srv'
+  shell: |
+    export PATH=$PATH:/opt/sesam/bin/sesam
+    sm_cmd add client {{ ansible_hostname }} -o LINUX -a SMSSH
+  delegate_to: "{{ sep_sesam_server }}"
 ...
