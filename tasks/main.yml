@@ -1,11 +1,25 @@
 ---
-- name: Gather facts if not yet done
+- name: "Verify that the variable sep_sesam_host_type exist"
+  assert:
+    that:
+    - sep_sesam_host_type is defined
+    fail_msg: "'sep_sesam_host_type' must be defined"
+    success_msg: "'sep_sesam_host_type' is defined"
+
+- name: "Verify that the variable sep_sesam_host_type is valid"
+  assert:
+    that:
+    - sep_sesam_host_type in "srv, rds, gui, cli"
+    fail_msg: "'sep_sesam_host_type' must contain one of 'srv|rds|gui|cli'"
+    success_msg: "'sep_sesam_host_type' == {{ sep_sesam_host_type }}"
+
+- name: "Gather facts if not yet done"
   when: ansible_distribution is not defined
   setup:
 
-- name: Include OS dependant variables
+- name: "Include OS dependant variables"
   include_vars: "{{ ansible_distribution_file_variety }}.yml"
 
-- name: Istall OS dependant repo & packages
+- name: "Install OS dependant repo & packages"
   include_tasks: "install_{{ ansible_distribution_file_variety }}.yml"
 ...

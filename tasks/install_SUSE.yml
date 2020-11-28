@@ -2,8 +2,14 @@
 - name: "install_SUSE | Install the SEP sesam repo"
   zypper_repository:
     name: sep-sesam
-    repo: "{{ sep_repo }}"
+    repo: "{{ sep_sesam_repo }}"
     runrefresh: yes
     auto_import_keys: yes
+    state: present
+
+- name: "install_SUSE | Install the SEP sesam packages"
+  zypper:
+    name: "{{ sep_sesam_pkg[sep_sesam_host_type] }}"
+    disable_recommends: no
     state: present
 ...

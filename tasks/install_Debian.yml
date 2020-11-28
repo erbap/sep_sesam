@@ -2,22 +2,27 @@
 - name: "install_Debian | install general packages"
   apt:
     name: "{{ packages }}"
-    state: latest
+    state: present
   vars:
     packages:
     - gnupg
 
 - name: "install_Debian | Add the SEP sesam key"
   apt_key:
-    url: "{{ sep_gpg_key }}"
+    url: "{{ sep_sesam_gpg_key }}"
 
 - name: "install_Debian | Install the SEP sesam repo"
   apt_repository:
-    repo: "{{ sep_repo }}"
+    repo: "{{ sep_sesam_repo }}"
     state: present
     filename: sep-sesam
 
 - name: "install_Debian | Update the cache"
   apt:
     update_cache: yes
+
+- name: "install_Debian | install SEP sesam packages"
+  apt:
+    name: "{{ sep_sesam_pkg[sep_sesam_host_type] }}"
+    state: present
 ...

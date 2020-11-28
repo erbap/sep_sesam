@@ -3,7 +3,12 @@
   yum_repository:
     name: sep-sesam
     description: "SEP sesam repo"
-    baseurl: "{{ sep_repo }}"
-    gpgkey: "{{ sep_gpg_key }}"
+    baseurl: "{{ sep_sesam_repo }}"
+    gpgkey: "{{ sep_sesam_gpg_key }}"
     gpgcheck: yes
+
+- name: "install_RedHat | Install the SEP sesam packages"
+  yum:
+    name: "{{ sep_sesam_pkg[sep_sesam_host_type] }}"
+    state: present
 ...

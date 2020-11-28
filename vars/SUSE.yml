@@ -1,3 +1,13 @@
 ---
-sep_repo: https://download.sep.de/linux/SuSE/{{ ansible_architecture }}/SLES{{ ansible_distribution_major_version }}/
+sep_sesam_repo: https://download.sep.de/linux/SuSE/{{ ansible_architecture }}/SLES{{ ansible_distribution_major_version }}/
+
+sep_sesam_pkg:
+  cli:
+  - sesam_cli
+  gui:
+  - sesam_gui
+  rds:
+  - sesam_rts
+  srv:
+  - sesam_srv
 ...

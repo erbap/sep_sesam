@@ -1,5 +1,5 @@
 ---
-sep_os_release:
+sep_sesam_os_release:
   # Debian
   "etch":    "Etch"    # 4
   "lenny":   "Lenny"   # 6
@@ -13,12 +13,22 @@ sep_os_release:
   "xenial":  "Jessie"  # 16.04
   "bionic":  "Stretch" # 18.04
 
-sep_os_arch:
+sep_sesam_os_arch:
   "i386":   "i386"
   "x86_64": "amd64"
   "ppc":    "ppc"
 
-sep_gpg_key: "https://download.sep.de/linux/repositories/debian/key.asc"
+sep_sesam_gpg_key: "https://download.sep.de/linux/repositories/debian/key.asc"
 
-sep_repo: "deb [arch={{ sep_os_arch[ansible_architecture]}}] https://download.sep.de/linux/repositories/debian/ {{ sep_os_release[ansible_distribution_release] | lower }} main"
+sep_sesam_repo: "deb [arch={{ sep_sesam_os_arch[ansible_architecture]}}] https://download.sep.de/linux/repositories/debian/ {{ sep_sesam_os_release[ansible_distribution_release] | lower }} main"
+
+sep_sesam_pkg:
+  cli:
+  - sesam-cli
+  gui:
+  - sesam-gui
+  rds:
+  - sesam-rts
+  srv:
+  - sesam-srv
 ...
